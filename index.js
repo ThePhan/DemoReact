@@ -20490,7 +20490,7 @@
 	        _this.handleEditButton = _this.handleEditButton.bind(_this);
 	        _this.updateUser = _this.updateUser.bind(_this);
 	        _this.handleFriendButton = _this.handleFriendButton.bind(_this);
-	        _this.deleteFriendHandle = _this.deleteFriendHandle.bind(_this);
+	        _this.deleteFriendHandleprops = _this.deleteFriendHandleprops.bind(_this);
 	        _this.componentDidMount = _this.componentDidMount.bind(_this);
 	        return _this;
 	    }
@@ -20603,13 +20603,17 @@
 	    }, {
 	        key: 'handleFriendButton',
 	        value: function handleFriendButton(index) {
-	            var userFriend = this.state.User[index].friends; //index of user
+	            //index of user
+	            // Get aray friend
+	            var userFriend = this.state.User[index].friends;
 	            if (userFriend.length == 0) {
 	                alert("Noone in your list friend");
 	            } else {
 	                var idUser = this.state.User[index]._id; // id user
 	                var arrayFriend = [];
+	                //loop arrayFriend user
 	                for (var i = 0; i < userFriend.length; i++) {
+	                    // loop array user
 	                    for (var j = 0; j < this.state.User.length; j++) {
 	                        if (userFriend[i] === this.state.User[j]._id) {
 	                            var nameFriend = {
@@ -20633,8 +20637,8 @@
 	            }
 	        }
 	    }, {
-	        key: 'deleteFriendHandle',
-	        value: function deleteFriendHandle(_idFriend, _id) {
+	        key: 'deleteFriendHandleprops',
+	        value: function deleteFriendHandleprops(_idFriend, _id) {
 	            // var friendss = this.state.friends.filter(function(friend) {
 	            //       return friend._idFriend !== _idFriend;
 	            // });
@@ -20648,7 +20652,8 @@
 	                },
 	                success: function success(result) {
 	                    if (result.message == "Delete friend oke") {
-	                        window.location.reload();
+	                        // window.location.reload();
+	                        this.loadData();
 	                    }
 	                },
 	                error: function error(err) {
@@ -20659,7 +20664,7 @@
 
 	            });
 	            // this.setState({friends: friendss});
-	            window.location.reload();
+	            //  window.location.reload();
 	        }
 	    }, {
 	        key: 'render',
@@ -20669,7 +20674,7 @@
 	                null,
 	                _react2.default.createElement(_FormUser2.default, { addUser: this.addUser, updateUser: this.updateUser, user: this.state.editUser, indexUser: this.state.editUserIndex }),
 	                this.state.friends.map(function (friend, i) {
-	                    return _react2.default.createElement(_ListFriend2.default, { key: i, dataFriend: friend, idUserss: this.state.idUsers, deleteFriendHandle: this.deleteFriendHandle });
+	                    return _react2.default.createElement(_ListFriend2.default, { key: i, dataFriend: friend, idUserss: this.state.idUsers, deleteFriendHandle: this.deleteFriendHandleprops });
 	                }, this),
 	                this.state.User.map(function (person, i) {
 	                    return _react2.default.createElement(_ListUser2.default, { handleEditButton: this.handleEditButton, handleFriendButton: this.handleFriendButton, deleteUser: this.deleteUser, key: i, data: person, indexUser: i });

@@ -62,7 +62,7 @@ var Schema = mongoose.Schema;
   				res.status(404).json({'message':'Noone was found'});
   			}
   			else{
-
+          deleteUserFriend(idUser);
   				user.remove(function(err, data){
   					if (err) {
   						res.status(304).json({'message':'Delete user faild'});
@@ -74,15 +74,41 @@ var Schema = mongoose.Schema;
   	}
   }
 
-  // deleteUserFriend = function(idUser){
-  //   User.find({}'friends': idUser}, function(err, arr){
-  //     console.log(arr);
-  //     if (arr.length <= 0) {
-  //       return 0;
-  //     }else {
-  //       for(var i=0; i<arr.length; i++){
-  //
-  //       }
-  //     }
-  //   });
-  // }
+  deleteUserFriend = function(idUser){
+    User.find(function(err, arr){
+      // console.log(arr);
+      if (err) {
+        console.log(err + "errrrrrrrrrrrrrrrrrrrrrrr");
+        return 0;
+      }else {
+        //loop array user
+        for(var i=0; i<arr.length; i++){
+          // get user at index i to save arr Friend after delete one value in arr Friend
+          var user = arr[i];
+          //get arr Friend of user in index arr[i]
+          var arrFriend = arr[i].friends;
+
+          //create new array
+          newArrFriend = [];
+          var k = 0;
+
+          // loop array friends
+          for(var j = 0; j < arrFriend.length; j++){
+            if (arrFriend[j] != idUser) {
+              newArrFriend[k] = arrFriend[j];
+              k++;
+              console.log("ok   " + arrFriend[j]);
+            }
+          }
+          user.friends = newArrFriend;
+          user.save(function(err, succ){
+            if (err) {
+              console.log(err);
+            }
+            console.log("success");
+          })
+        }
+      }
+
+    });
+  }

@@ -19,7 +19,7 @@ class App extends React.Component {
         this.handleEditButton = this.handleEditButton.bind(this);
         this.updateUser = this.updateUser.bind(this);
         this.handleFriendButton = this.handleFriendButton.bind(this);
-        this.deleteFriendHandle = this.deleteFriendHandle.bind(this);
+        this.deleteFriendHandleprops = this.deleteFriendHandleprops.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
     };
 
@@ -121,13 +121,17 @@ class App extends React.Component {
     }
 //Show list friend of user
     handleFriendButton(index) {
-        var userFriend = this.state.User[index].friends;//index of user
+      //index of user
+      // Get aray friend
+        var userFriend = this.state.User[index].friends;
         if(userFriend.length == 0){
           alert("Noone in your list friend");
         }else {
           var idUser = this.state.User[index]._id;// id user
           var arrayFriend = [];
+          //loop arrayFriend user
           for (var i = 0; i < userFriend.length; i++) {
+            // loop array user
               for (var j = 0; j < this.state.User.length; j++) {
                   if (userFriend[i] === this.state.User[j]._id) {
                       var nameFriend = {
@@ -152,7 +156,7 @@ class App extends React.Component {
         }
     }
 
-    deleteFriendHandle(_idFriend, _id) {
+    deleteFriendHandleprops(_idFriend, _id) {
         // var friendss = this.state.friends.filter(function(friend) {
         //       return friend._idFriend !== _idFriend;
         // });
@@ -166,7 +170,8 @@ class App extends React.Component {
             },
             success: function(result){
               if (result.message == "Delete friend oke") {
-                window.location.reload();
+                // window.location.reload();
+                this.loadData();
               }
             },
             error:function(err){
@@ -177,7 +182,7 @@ class App extends React.Component {
 
         });
         // this.setState({friends: friendss});
-         window.location.reload();
+        //  window.location.reload();
     }
 
     render() {
@@ -186,7 +191,7 @@ class App extends React.Component {
                 <FormUser addUser={this.addUser} updateUser={this.updateUser} user={this.state.editUser} indexUser={this.state.editUserIndex}></FormUser>
 
                 {this.state.friends.map(function(friend, i) {
-                    return (<ListFriend key={i} dataFriend={friend} idUserss={this.state.idUsers}  deleteFriendHandle={this.deleteFriendHandle} />)
+                    return (<ListFriend key={i} dataFriend={friend} idUserss={this.state.idUsers}  deleteFriendHandle={this.deleteFriendHandleprops} />)
                 }, this)}
                 {this.state.User.map(function(person, i) {
                     return (<List handleEditButton={this.handleEditButton} handleFriendButton={this.handleFriendButton} deleteUser={this.deleteUser} key={i} data={person} indexUser={i}/>)
