@@ -74,6 +74,7 @@ var Schema = mongoose.Schema;
   	}
   }
 
+// delete id user in array friend of user when delete this user
   deleteUserFriend = function(idUser){
     User.find(function(err, arr){
       // console.log(arr);
@@ -97,7 +98,7 @@ var Schema = mongoose.Schema;
             if (arrFriend[j] != idUser) {
               newArrFriend[k] = arrFriend[j];
               k++;
-              console.log("ok   " + arrFriend[j]);
+              // console.log("ok   " + arrFriend[j]);
             }
           }
           user.friends = newArrFriend;
