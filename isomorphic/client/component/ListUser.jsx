@@ -43,6 +43,7 @@ constructor(props) {
               <Button id="spaceButton" onClick={this.handleDeleteButton} bsStyle="danger" bsSize="small"><Glyphicon glyph="remove"/> Delete</Button>
               <Button id="spaceButton" onClick={this.handleEditButton} bsStyle="warning" bsSize="small"><Glyphicon glyph="pencil"/> Edit </Button>
               <Button id="spaceButton" onClick={this.handleFriendButton} bsStyle="info" bsSize="small"><Glyphicon glyph="list"/> Friend </Button>
+              <Button id="spaceButton" onClick={this.handleAddFriendButton} bsStyle="info" bsSize="small"><Glyphicon glyph="list"/>Add Friend</Button>
            </ul>
       </div>
       );
