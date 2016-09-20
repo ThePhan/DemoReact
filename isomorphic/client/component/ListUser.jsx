@@ -1,11 +1,14 @@
 import React from 'react';
 import {Button} from 'react-bootstrap';
 import {Glyphicon} from 'react-bootstrap';
+import Modals from './Modal.jsx';
 
 class ListUser extends React.Component {
 constructor(props) {
     super(props);
-
+    this.state={
+      modalIsOpen: false
+    }
     this.handleDeleteButton = this.handleDeleteButton.bind(this);
     this.handleEditButton = this.handleEditButton.bind(this);
     this.handleFriendButton = this.handleFriendButton.bind(this);
@@ -24,6 +27,12 @@ constructor(props) {
     this.props.handleFriendButton(this.props.indexUser);
   }
 
+  handleModalCloseRequest(){
+    this.setState({modalIsOpen: false});
+  }
+  openModal(){
+    this.setState({modalIsOpen: true});
+  }
    render() {
       return (
       <div id="try">
@@ -43,7 +52,7 @@ constructor(props) {
               <Button id="spaceButton" onClick={this.handleDeleteButton} bsStyle="danger" bsSize="small"><Glyphicon glyph="remove"/> Delete</Button>
               <Button id="spaceButton" onClick={this.handleEditButton} bsStyle="warning" bsSize="small"><Glyphicon glyph="pencil"/> Edit </Button>
               <Button id="spaceButton" onClick={this.handleFriendButton} bsStyle="info" bsSize="small"><Glyphicon glyph="list"/> Friend </Button>
-              <Button id="spaceButton" onClick={this.handleAddFriendButton} bsStyle="info" bsSize="small"><Glyphicon glyph="list"/>Add Friend</Button>
+              <Modals openModal={this.openModal.bind(this)} handleModalCloseRequest={this.handleModalCloseRequest.bind(this)} modalIsOpen={this.state.modalIsOpen} />
            </ul>
       </div>
       );

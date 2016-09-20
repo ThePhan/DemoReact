@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import $ from 'jquery';
 import List from './component/ListUser.jsx';
 import ListFriend from './component/ListFriend.jsx';
@@ -13,6 +13,7 @@ class App extends React.Component {
             User: [],
             friends: []
         }
+
 
         this.deleteUser = this.deleteUser.bind(this);
         this.addUser = this.addUser.bind(this);
@@ -170,7 +171,6 @@ class App extends React.Component {
             },
             success: function(result){
               if (result.message == "Delete friend oke") {
-                // window.location.reload();
                 this.loadData();
               }
             },
@@ -181,15 +181,12 @@ class App extends React.Component {
             }
 
         });
-        // this.setState({friends: friendss});
-        //  window.location.reload();
     }
 
     render() {
         return (
             <div>
                 <FormUser addUser={this.addUser} updateUser={this.updateUser} user={this.state.editUser} indexUser={this.state.editUserIndex}></FormUser>
-
                 {this.state.friends.map(function(friend, i) {
                     return (<ListFriend key={i} dataFriend={friend} idUserss={this.state.idUsers}  deleteFriendHandle={this.deleteFriendHandleprops} />)
                 }, this)}
